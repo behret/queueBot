@@ -22,6 +22,18 @@ userChatIds = dict()
 
 # list of functions and associated handlers
 
+
+# /start
+def start(bot, update):
+    bot.sendMessage(chat_id=update.message.chat_id, text="Yo! Here's what you can do \n /requestNumber request a number\n /status see the current number")
+
+from telegram.ext import CommandHandler
+start_handler = CommandHandler('start', start)
+dispatcher.add_handler(start_handler)
+
+
+
+
 def requestNumber(bot, update):
     global currentMax
     currentMax = currentMax + 1
@@ -36,12 +48,12 @@ dispatcher.add_handler(requestNumber_handler)
 
 
 
-def showCurrentNumber(bot, update):
+def status(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id, text="The current number is " + str(currentUser) )
 
 from telegram.ext import CommandHandler
-showCurrentNumber_handler = CommandHandler('showCurrentNumber', showCurrentNumber)
-dispatcher.add_handler(showCurrentNumber_handler)
+status_handler = CommandHandler('status', status)
+dispatcher.add_handler(status_handler)
 
 
 def nextUser(bot, update):
@@ -65,13 +77,7 @@ dispatcher.add_handler(nextUser_handler)
 
 # list of functions and associated handlers
 
-# /start
-def start(bot, update):
-    bot.sendMessage(chat_id=update.message.chat_id, text="I'm a bot, please talk to me!")
 
-from telegram.ext import CommandHandler
-start_handler = CommandHandler('start', start)
-dispatcher.add_handler(start_handler)
 
 
 # echoing
